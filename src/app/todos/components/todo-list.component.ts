@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToDo } from '../models/todo';
+import { AppState } from 'src/app/store/state/AppState';
+import { Store, Action } from '@ngrx/store';
+import { ToDoActions } from 'src/app/store/actions/todo.actions';
+
 
 @Component({
     selector: 'app-todoList',
@@ -7,7 +11,14 @@ import { ToDo } from '../models/todo';
 })
 export class ToDoListComponent implements OnInit {
     todos: ToDo[];
-    constructor() { }
+    constructor(private store: Store<AppState>) { 
+        this.store.dispatch({ type: ToDoActions.GetToDo} as Action );
+    }
 
-    ngOnInit(): void { }
+    ngOnInit(): void { 
+        
+        this.store.subscribe(
+            data => console.log(data)
+        );
+    }
 }

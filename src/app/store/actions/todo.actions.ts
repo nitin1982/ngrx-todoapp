@@ -1,21 +1,25 @@
 import { Action } from '@ngrx/store';
 import { ToDo } from 'src/app/todos/models/todo';
-import { type } from 'os';
+
 
 export enum ToDoActions{
     AddToDo = "[ToDo] Add ToDo",
-    RemoveToDo = "[ToDo] Remove ToDo"
+    RemoveToDo = "[ToDo] Remove ToDo",
+    GetToDo = "[ToDo] GetToDo"
 }
 export class AddToDoAction implements Action{
-    readonly type = ToDoActions.AddToDo;
+    public readonly type = ToDoActions.AddToDo;
 
-    constructor(payload: ToDo){}
+    constructor(public payload: ToDo){}
 }
 
 export class RemoveToDoAction implements Action{
-    readonly type = ToDoActions.RemoveToDo;
+    public readonly type = ToDoActions.RemoveToDo;
 
-    constructor(payloadIndex: number){}
+    constructor(public payloadIndex: number){}
 }
 
-export type ToDoActionType = AddToDoAction | RemoveToDoAction;
+export class GetToDoAction implements Action{
+    public readonly type = ToDoActions.GetToDo;
+}
+export type ToDoActionType = AddToDoAction | RemoveToDoAction | GetToDoAction;
